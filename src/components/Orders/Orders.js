@@ -2,7 +2,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
-import { removeFromDb } from "../../utilities/fakedb";
+import { deleteShoppingCart, removeFromDb } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import useCart from "../Hook/useCart";
 import useProducts from "../Hook/useProducts";
@@ -16,6 +16,11 @@ const Orders = () => {
     setCart(rest);
     removeFromDb(product.id);
   };
+  const clearCart = (cart) => {
+    cart = [];
+    setCart(cart);
+    deleteShoppingCart();
+  };
   return (
     <div className="shop-container">
       <div className="review-items-container">
@@ -28,7 +33,7 @@ const Orders = () => {
         ))}
       </div>
       <div className="cart-container">
-        <Cart cart={cart}>
+        <Cart cart={cart} clearCart={clearCart}>
           <Link to="/inventory">
             <button className="button">
               <p>Procced Checkout</p>
