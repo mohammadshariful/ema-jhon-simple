@@ -28,6 +28,7 @@ const Shop = () => {
   const handlerAddToCart = (selectedProduct) => {
     let newCart = [];
     const exit = cart.find((product) => product.id === selectedProduct.id);
+    console.log(exit);
     if (!exit) {
       selectedProduct.quantity = 1;
       newCart = [...cart, selectedProduct];
