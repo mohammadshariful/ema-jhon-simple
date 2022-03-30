@@ -3,3 +3,14 @@
   top: 0;
   padding: 30px 20px;
 }
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+button {
+  border: 0;
+}
