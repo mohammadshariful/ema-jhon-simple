@@ -66,7 +66,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  display: block;
   margin: auto;
   background-color: transparent;
   border: 1px solid #2a414f;
@@ -75,4 +74,9 @@
   font-size: 14px;
   color: #2a414f;
   cursor: pointer;
+}
+.google-logo {
+  width: 20px;
+  display: block;
+  margin-right: 10px;
 }

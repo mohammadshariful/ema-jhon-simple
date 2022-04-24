@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import googleImg from "../../images/google.png";
 import "./SignUp.css";
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -12,6 +17,11 @@ const SignUp = () => {
 
   const [createUserWithEmailAndPassword, user] =
     useCreateUserWithEmailAndPassword(auth);
+
+  const [signInWithGoogle, authUser] = useSignInWithGoogle(auth);
+
+  authUser && navigate("/shop");
+
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
   };
@@ -70,7 +80,11 @@ const SignUp = () => {
           <span>or</span>
           <span className="border-line"></span>
         </div>
-        <button className="google-signin-btn">
+        <button
+          className="google-signin-btn"
+          onClick={() => signInWithGoogle()}
+        >
+          <img className="google-logo" src={googleImg} alt="" />
           <p>Continue with Google</p>
         </button>
       </div>

@@ -11,6 +11,15 @@
 .cart-container {
   background-color: rgba(255, 153, 0, 0.3);
 }
+.paginations button {
+  margin-right: 10px;
+  background-color: aliceblue;
+  border: 1px solid orange;
+}
+.paginations .selected {
+  background-color: orange;
+  color: white;
+}
 @media only screen and (max-width: 576px) {
   .products-container {
     grid-template-columns: 1fr;

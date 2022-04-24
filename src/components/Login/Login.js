@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useEffect, useState } from "react";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import googleImg from "../../images/google.png";
 import "./Login.css";
 const Login = () => {
   const navigate = useNavigate();
@@ -9,6 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, authUser] = useSignInWithGoogle(auth);
+
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
   };
@@ -23,7 +29,14 @@ const Login = () => {
 
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
-  user && navigate(from, { replace: true });
+
+  useEffect(() => {
+    user && navigate(from, { replace: true });
+    authUser && navigate(from, { replace: true });
+  });
+
+  /*  user && navigate(from, { replace: true }); */
+
   return (
     <div className="form-container">
       <div>
@@ -52,7 +65,11 @@ const Login = () => {
           <span>or</span>
           <span className="border-line"></span>
         </div>
-        <button className="google-signin-btn">
+        <button
+          className="google-signin-btn"
+          onClick={() => signInWithGoogle()}
+        >
+          <img className="google-logo" src={googleImg} alt="" />
           <p>Continue with Google</p>
         </button>
       </div>
